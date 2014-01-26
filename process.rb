@@ -76,7 +76,7 @@ class DataSet < Array
 		end
 
 		# Weighed average of each element of data with weight as 1/distance^2
-		w = n.map{|x| x.distance_sq_to(p)}
+		w = n.map{|x| 1.0/x.distance_sq_to(p)}
 		w_sum = w.inject(0.0){|sum, wi| sum += wi}
 		weighed_data = n.zip(w).map{|e, wi| e.data.map{|x| x * wi / w_sum}}
 		average = weighed_data.transpose.map{|x| x.inject(0.0, :+)}
