@@ -46,7 +46,7 @@ class DataSet < Array
 
 	# Hash function for indexing data
 	def hash(p)
-		p.map{|x| (x/@grid_size).to_i}
+		p.map{|x| (x/@grid_size).round.to_i}
 	end
 
 	# Find datapoints around location p
