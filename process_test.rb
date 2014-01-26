@@ -23,5 +23,13 @@ class TestGridScanner < Test::Unit::TestCase
 		end
 		assert_equal(target.sort, result.sort)
 	end
+
+	def test_scan_3d
+		result = Array.new
+		GridScanner.new(3).scan do |delta|
+			result << delta
+		end
+		assert_equal(3*3*3, result.size)
+	end
 end
 
