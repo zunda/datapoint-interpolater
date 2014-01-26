@@ -122,7 +122,7 @@ src.index!(10)
 
 # Show data on xz plane
 step = 0.1
-half_width = 3
+half_width = 4
 n = (half_width / step).ceil
 y = 0.0
 (-n).upto(n) do |zi|
