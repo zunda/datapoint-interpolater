@@ -91,18 +91,20 @@ class GridScanner
 	end
 
 	def scan(&block)
+		yield(@delta.dup)
 		_next(0, &block)
 	end
 
 	def _next(dim, &block)
-		return if @delta.size <= dim
-		yield(@delta)
 		@delta[dim] += 1
 		if @delta[dim] > 1
 			@delta[dim] = -1
-			_next(dim + 1, &block)
+			if dim + 1 < @delta.size
+				_next(dim + 1, &block)
+			end
 		else
-			_next(dim, &block)
+			yield(@delta.dup)
+			_next(0, &block)
 		end
 	end
 end
