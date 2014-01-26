@@ -11,7 +11,7 @@ class DataPoint
 	end
 
 	def distance_sq_to(p)
-		return @location.zip(p).map{|x| (x[0] - x[1])**2}.inject(0.0){|sum, x| sum += x}
+		return @location.zip(p).map{|x| (x[0] - x[1])**2}.inject(0.0, :+)
 	end
 end
 
