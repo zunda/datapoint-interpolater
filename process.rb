@@ -69,6 +69,7 @@ class DataSet < Array
 	def interpolate_at(p)
 		n = near_to(p)[0..1]
 		return nil if n.size < 1
+		return n[0].data
 
 		# Check if we have a datapoint at the desired location
 		if n[0].distance_sq_to(p) < 1e-10
