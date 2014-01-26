@@ -118,6 +118,20 @@ ARGF.each do |line|
 	p = DataPoint.new(loc, data)
 	src << p
 end
-src.index!
+src.index!(3)
 
-p src.interpolate_at([-9.77523996E-07,-0.00000000,-3.00000000])
+# Show data on xz plane
+step = 0.1
+half_width = 3
+n = (half_width / step).ceil
+y = 0.0
+(-n).upto(n) do |zi|
+	(-n).upto(n) do |xi|
+		x = xi*step
+		z = zi*step
+		p = [x, y, z]
+		data = src.interpolate_at(p)
+		puts "#{p.join(',')},#{data ? data.join(',') : '*,*,*'}"
+	end
+end
+
