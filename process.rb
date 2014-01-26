@@ -37,7 +37,7 @@ class DataSet < Array
 		@grid_size = env_max.zip(env_min).map{|x| (x[0] - x[1]).abs}.max / division
 		@db = Hash.new
 		self.each do |e|
-			h = self.hash(e.location)
+			h = hash(e.location)
 			@db[h] ||= Array.new
 			@db[h] << e
 		end
