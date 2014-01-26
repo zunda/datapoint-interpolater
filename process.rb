@@ -118,7 +118,7 @@ ARGF.each do |line|
 	p = DataPoint.new(loc, data)
 	src << p
 end
-src.index!(20)
+src.index!(10)
 
 # Show data on xz plane
 step = 0.1
