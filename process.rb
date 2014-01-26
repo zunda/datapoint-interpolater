@@ -107,32 +107,33 @@ class GridScanner
 	end
 end
 
-# Read data from stdinput or as specified in command line option
-x_i = 0	# index of positoin x
-b_i = 8	# index of data vector x
-src = DataSet.new
-ARGF.each do |line|
-	next if /^#/ =~ line
-	data = line.strip.split(',').map{|e| e.to_f}
-	loc = [data[x_i], data[x_i+1], data[x_i+2]]
-	data = [data[b_i], data[b_i+1], data[b_i+2]]
-	p = DataPoint.new(loc, data)
-	src << p
-end
-src.index!(10)
+if __FILE__ == $0
+	# Read data from stdinput or as specified in command line option
+	x_i = 0	# index of positoin x
+	b_i = 8	# index of data vector x
+	src = DataSet.new
+	ARGF.each do |line|
+		next if /^#/ =~ line
+		data = line.strip.split(',').map{|e| e.to_f}
+		loc = [data[x_i], data[x_i+1], data[x_i+2]]
+		data = [data[b_i], data[b_i+1], data[b_i+2]]
+		p = DataPoint.new(loc, data)
+		src << p
+	end
+	src.index!(10)
 
-# Show data on xz plane
-step = 0.1
-half_width = 4
-n = (half_width / step).ceil
-y = 0.0
-(-n).upto(n) do |zi|
-	(-n).upto(n) do |xi|
-		x = xi*step
-		z = zi*step
-		p = [x, y, z]
-		data = src.interpolate_at(p)
-		puts "#{p.join(',')},#{data ? data.join(',') : '*,*,*'}"
+	# Show data on xz plane
+	step = 0.1
+	half_width = 4
+	n = (half_width / step).ceil
+	y = 0.0
+	(-n).upto(n) do |zi|
+		(-n).upto(n) do |xi|
+			x = xi*step
+			z = zi*step
+			p = [x, y, z]
+			data = src.interpolate_at(p)
+			puts "#{p.join(',')},#{data ? data.join(',') : '*,*,*'}"
+		end
 	end
 end
-
